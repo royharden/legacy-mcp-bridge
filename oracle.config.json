@@ -1,0 +1,1 @@
+{"command":"node","entry":"legacy/legacy.mjs","reports":["INQUIRY","LIST","HISTORY","AGING","LAYOUT"],"views":["attacked","clean"],"timeoutMs":10000,"maxOutputBytes":2000000}

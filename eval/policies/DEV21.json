@@ -1,0 +1,11 @@
+{
+  "label": "SCRIPTED FIXTURE — not a model result",
+  "question_id": "DEV21",
+  "condition": "A",
+  "tool": "aging_summary",
+  "args": {
+    "as_of": "2023-03-30"
+  },
+  "kind": "count",
+  "path": "total_count"
+}

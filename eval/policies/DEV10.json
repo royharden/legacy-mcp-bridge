@@ -1,0 +1,13 @@
+{
+  "label": "SCRIPTED FIXTURE — not a model result",
+  "question_id": "DEV10",
+  "condition": "A",
+  "tool": "accounts_find",
+  "args": {
+    "status": "A",
+    "name_prefix": "ZEPHYR",
+    "limit": 50
+  },
+  "kind": "count",
+  "path": "matched_count"
+}

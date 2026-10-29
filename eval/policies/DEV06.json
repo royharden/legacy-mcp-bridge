@@ -1,0 +1,11 @@
+{
+  "label": "SCRIPTED FIXTURE — not a model result",
+  "question_id": "DEV06",
+  "condition": "A",
+  "tool": "account_get",
+  "args": {
+    "account_id": "0000000047"
+  },
+  "kind": "value",
+  "path": "data.monthly_interest_minor"
+}

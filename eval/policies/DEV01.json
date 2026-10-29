@@ -1,0 +1,14 @@
+{
+  "label": "SCRIPTED FIXTURE — not a model result",
+  "question_id": "DEV01",
+  "condition": "A",
+  "tool": "transactions_list",
+  "args": {
+    "account_id": "0000000052",
+    "from": "2024-03-01",
+    "to": "2024-04-30",
+    "limit": 100
+  },
+  "kind": "sum",
+  "path": "debit_total_minor"
+}

@@ -1,0 +1,40 @@
+{
+  "name": "legacy-mcp-bridge",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Read-only MCP stdio bridge over a synthetic fixed-width legacy account system, with parity tests against the legacy program's printed reports.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint .",
+    "test": "vitest run --config vitest.config.ts",
+    "test:stdio": "vitest run --config vitest.stdio.config.ts",
+    "gen:fixtures": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/gen-fixtures.ts",
+    "parity": "node --experimental-strip-types --disable-warning=ExperimentalWarning parity/harness.ts",
+    "mutants": "node --experimental-strip-types --disable-warning=ExperimentalWarning parity/mutate.ts",
+    "eval:mock": "node --experimental-strip-types --disable-warning=ExperimentalWarning eval/run.ts --mode mock",
+    "eval:live": "node --experimental-strip-types --disable-warning=ExperimentalWarning eval/run.ts --mode live",
+    "demo": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/demo.ts",
+    "readonly-proof": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/readonly-proof.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.25.2",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.20.0",
+    "@types/node": "22.13.4",
+    "eslint": "9.20.1",
+    "typescript": "5.7.3",
+    "typescript-eslint": "8.24.1",
+    "vitest": "3.0.5"
+  },
+  "optionalDependencies": {
+    "@anthropic-ai/sdk": "0.37.0"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "label": "SCRIPTED FIXTURE — not a model result",
+  "question_id": "DEV12",
+  "condition": "A",
+  "tool": "accounts_find",
+  "args": {
+    "status": "A",
+    "name_prefix": "DUPLICATE",
+    "limit": 50
+  },
+  "kind": "list",
+  "path": "data"
+}

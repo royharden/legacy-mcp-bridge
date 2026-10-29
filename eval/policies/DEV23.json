@@ -1,0 +1,9 @@
+{
+  "label": "SCRIPTED FIXTURE — not a model result",
+  "question_id": "DEV23",
+  "condition": "A",
+  "tool": "describe_layouts",
+  "args": {},
+  "kind": "value",
+  "path": "data.layouts[record=ACCTMSTR].record_length"
+}

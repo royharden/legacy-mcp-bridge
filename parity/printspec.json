@@ -1,0 +1,256 @@
+{
+  "version": 1,
+  "program": "LEGACY01",
+  "lineWidth": 132,
+  "pageLength": 55,
+  "lineTerminator": "\n",
+  "lineTypeColumn": { "start": 1, "width": 3, "note": "columns 1-3 hold the line-type code; column 4 is blank" },
+  "kinds": {
+    "literal": "fixed text, equal to value",
+    "text": "left-aligned, blank-padded; low-values printed as blanks, other non-printables as '?'; trailing blanks are padding",
+    "code": "left-aligned, blank-padded code or identifier",
+    "count": "unsigned integer, zero-filled to width; all '*' when it does not fit",
+    "money": "right-aligned edited minor units: thousands commas, point, 2 decimals, trailing sign ('-' negative, blank otherwise); all '*' on overflow; all '?' when the source field is not numeric",
+    "date": "left-aligned yyyy-mm-dd, or NEVER (000000), or INVALID (not a calendar date / not numeric)",
+    "rate": "9.999 annual rate (thousandths); '?????' when not numeric",
+    "taxid": "the 9-character tax id exactly as stored, UNMASKED (text rules for non-printables); blank when blank. Parity: bridge value must equal mask(oracle value) (expected_divergence); diffs mask it",
+    "pointer": "one-based physical record pointer FILE#n, left-aligned",
+    "volatile": "run-dependent value; ignored by parity (ignore_volatile)"
+  },
+  "pageHeader": {
+    "lineType": "HDR",
+    "columns": [
+      { "name": "program", "start": 5, "width": 8, "kind": "literal", "value": "LEGACY01" },
+      { "name": "report", "start": 14, "width": 8, "kind": "code" },
+      { "name": "view", "start": 23, "width": 8, "kind": "code" },
+      { "name": "run_ts_label", "start": 32, "width": 6, "kind": "literal", "value": "RUN-TS" },
+      { "name": "run_ts", "start": 39, "width": 19, "kind": "volatile" },
+      { "name": "page_label", "start": 59, "width": 4, "kind": "literal", "value": "PAGE" },
+      { "name": "page", "start": 64, "width": 5, "kind": "count" }
+    ]
+  },
+  "columnHeading": {
+    "lineType": "COL",
+    "rule": "printed after HDR on every page of a report whose headingFrom is set: each column of that line type, name upper-cased, cut at its width, at its start column"
+  },
+  "trailer": {
+    "lineType": "TRL",
+    "rule": "one TRL line per data file the report read, after the body; LAYOUT prints ACCTMSTR then TRANS",
+    "columns": [
+      { "name": "file", "start": 5, "width": 8, "kind": "code" },
+      { "name": "records_label", "start": 14, "width": 12, "kind": "literal", "value": "RECORDS READ" },
+      { "name": "records_read", "start": 27, "width": 7, "kind": "count" },
+      { "name": "tail_label", "start": 35, "width": 18, "kind": "literal", "value": "SKIPPED-TAIL-BYTES" },
+      { "name": "skipped_tail_bytes", "start": 54, "width": 2, "kind": "count" },
+      { "name": "dup_label", "start": 57, "width": 10, "kind": "literal", "value": "DUPLICATES" },
+      { "name": "duplicates", "start": 68, "width": 5, "kind": "count" }
+    ]
+  },
+  "endOfReport": {
+    "lineType": "END",
+    "rule": "last line of every report; a report without it is truncated",
+    "columns": [
+      { "name": "message", "start": 5, "width": 13, "kind": "literal", "value": "END OF REPORT" }
+    ]
+  },
+  "reports": {
+    "INQUIRY": {
+      "files": ["ACCTMSTR"],
+      "headingFrom": null,
+      "order": "AC1 AC2 | NFD ; TRL ; END",
+      "lineTypes": {
+        "AC1": {
+          "columns": [
+            { "name": "source", "start": 5, "width": 13, "kind": "pointer" },
+            { "name": "acct_id", "start": 19, "width": 10, "kind": "code" },
+            { "name": "name", "start": 30, "width": 25, "kind": "text" },
+            { "name": "status", "start": 56, "width": 1, "kind": "code" },
+            { "name": "raw_status", "start": 58, "width": 1, "kind": "code" },
+            { "name": "open_date", "start": 60, "width": 10, "kind": "date" },
+            { "name": "balance", "start": 71, "width": 15, "kind": "money" },
+            { "name": "credit_limit", "start": 87, "width": 13, "kind": "money" },
+            { "name": "rate", "start": 101, "width": 5, "kind": "rate" },
+            { "name": "tax_id", "start": 107, "width": 9, "kind": "taxid" }
+          ]
+        },
+        "AC2": {
+          "columns": [
+            { "name": "acct_id", "start": 5, "width": 10, "kind": "code" },
+            { "name": "memo", "start": 16, "width": 25, "kind": "text" },
+            { "name": "monthly_interest", "start": 42, "width": 15, "kind": "money" }
+          ]
+        },
+        "NFD": {
+          "columns": [
+            { "name": "acct_id", "start": 5, "width": 10, "kind": "code" },
+            { "name": "message", "start": 16, "width": 17, "kind": "literal", "value": "ACCOUNT NOT FOUND" }
+          ]
+        }
+      }
+    },
+    "LIST": {
+      "files": ["ACCTMSTR"],
+      "headingFrom": "DTL",
+      "order": "SEL ; DTL* ; FTR ; TRL ; END",
+      "lineTypes": {
+        "SEL": {
+          "columns": [
+            { "name": "status_label", "start": 5, "width": 6, "kind": "literal", "value": "STATUS" },
+            { "name": "status", "start": 12, "width": 1, "kind": "code" },
+            { "name": "prefix_label", "start": 14, "width": 6, "kind": "literal", "value": "PREFIX" },
+            { "name": "prefix", "start": 21, "width": 25, "kind": "text" }
+          ]
+        },
+        "DTL": {
+          "columns": [
+            { "name": "source", "start": 5, "width": 13, "kind": "pointer" },
+            { "name": "acct_id", "start": 19, "width": 10, "kind": "code" },
+            { "name": "name", "start": 30, "width": 25, "kind": "text" },
+            { "name": "status", "start": 56, "width": 1, "kind": "code" },
+            { "name": "raw_status", "start": 58, "width": 1, "kind": "code" },
+            { "name": "open_date", "start": 60, "width": 10, "kind": "date" },
+            { "name": "balance", "start": 71, "width": 15, "kind": "money" }
+          ]
+        },
+        "FTR": {
+          "columns": [
+            { "name": "matched_label", "start": 5, "width": 7, "kind": "literal", "value": "MATCHED" },
+            { "name": "matched_count", "start": 13, "width": 7, "kind": "count" },
+            { "name": "total_label", "start": 21, "width": 13, "kind": "literal", "value": "BALANCE-TOTAL" },
+            { "name": "balance_total", "start": 35, "width": 22, "kind": "money" }
+          ]
+        }
+      }
+    },
+    "HISTORY": {
+      "files": ["TRANS"],
+      "headingFrom": "DTL",
+      "order": "SEL ; DTL* ; FTR ; TRL ; END",
+      "lineTypes": {
+        "SEL": {
+          "columns": [
+            { "name": "account_label", "start": 5, "width": 7, "kind": "literal", "value": "ACCOUNT" },
+            { "name": "acct_id", "start": 13, "width": 10, "kind": "code" },
+            { "name": "from_label", "start": 24, "width": 4, "kind": "literal", "value": "FROM" },
+            { "name": "from", "start": 29, "width": 10, "kind": "date" },
+            { "name": "to_label", "start": 40, "width": 2, "kind": "literal", "value": "TO" },
+            { "name": "to", "start": 43, "width": 10, "kind": "date" }
+          ]
+        },
+        "DTL": {
+          "columns": [
+            { "name": "source", "start": 5, "width": 13, "kind": "pointer" },
+            { "name": "tran_id", "start": 19, "width": 10, "kind": "code" },
+            { "name": "acct_id", "start": 30, "width": 10, "kind": "code" },
+            { "name": "tran_date", "start": 41, "width": 10, "kind": "date" },
+            { "name": "tran_type", "start": 52, "width": 1, "kind": "code" },
+            { "name": "tran_status", "start": 54, "width": 1, "kind": "code" },
+            { "name": "amount", "start": 56, "width": 13, "kind": "money" },
+            { "name": "desc", "start": 70, "width": 30, "kind": "text" }
+          ]
+        },
+        "FTR": {
+          "columns": [
+            { "name": "matched_label", "start": 5, "width": 7, "kind": "literal", "value": "MATCHED" },
+            { "name": "matched_count", "start": 13, "width": 7, "kind": "count" },
+            { "name": "debit_label", "start": 21, "width": 11, "kind": "literal", "value": "DEBIT-TOTAL" },
+            { "name": "debit_total", "start": 33, "width": 22, "kind": "money" },
+            { "name": "credit_label", "start": 56, "width": 12, "kind": "literal", "value": "CREDIT-TOTAL" },
+            { "name": "credit_total", "start": 69, "width": 22, "kind": "money" }
+          ]
+        }
+      }
+    },
+    "AGING": {
+      "files": ["TRANS"],
+      "headingFrom": null,
+      "order": "SEL ; BKT x5 (0, 1-30, 31-60, 61-90, >90) ; FTR ; PTR* (bucket order, then physical order, 8 per line) ; TRL ; END",
+      "lineTypes": {
+        "SEL": {
+          "columns": [
+            { "name": "as_of_label", "start": 5, "width": 5, "kind": "literal", "value": "AS-OF" },
+            { "name": "as_of", "start": 11, "width": 10, "kind": "date" }
+          ]
+        },
+        "BKT": {
+          "columns": [
+            { "name": "bucket", "start": 5, "width": 5, "kind": "code" },
+            { "name": "count_label", "start": 11, "width": 5, "kind": "literal", "value": "COUNT" },
+            { "name": "count", "start": 17, "width": 7, "kind": "count" },
+            { "name": "total_label", "start": 25, "width": 5, "kind": "literal", "value": "TOTAL" },
+            { "name": "total", "start": 31, "width": 22, "kind": "money" }
+          ]
+        },
+        "FTR": {
+          "columns": [
+            { "name": "matched_label", "start": 5, "width": 7, "kind": "literal", "value": "MATCHED" },
+            { "name": "matched_count", "start": 13, "width": 7, "kind": "count" },
+            { "name": "total_label", "start": 21, "width": 12, "kind": "literal", "value": "AMOUNT-TOTAL" },
+            { "name": "amount_total", "start": 34, "width": 22, "kind": "money" }
+          ]
+        },
+        "PTR": {
+          "columns": [
+            { "name": "bucket", "start": 5, "width": 5, "kind": "code" },
+            { "name": "source_1", "start": 11, "width": 13, "kind": "pointer" },
+            { "name": "source_2", "start": 25, "width": 13, "kind": "pointer" },
+            { "name": "source_3", "start": 39, "width": 13, "kind": "pointer" },
+            { "name": "source_4", "start": 53, "width": 13, "kind": "pointer" },
+            { "name": "source_5", "start": 67, "width": 13, "kind": "pointer" },
+            { "name": "source_6", "start": 81, "width": 13, "kind": "pointer" },
+            { "name": "source_7", "start": 95, "width": 13, "kind": "pointer" },
+            { "name": "source_8", "start": 109, "width": 13, "kind": "pointer" }
+          ]
+        }
+      }
+    },
+    "LAYOUT": {
+      "files": ["ACCTMSTR", "TRANS"],
+      "headingFrom": null,
+      "order": "REC ACCTMSTR ; FLD x10 ; REC TRANS ; FLD x8 ; POL x6 ; DIA ACCTMSTR ; DIA TRANS ; TRL ACCTMSTR ; TRL TRANS ; END",
+      "lineTypes": {
+        "REC": {
+          "columns": [
+            { "name": "record", "start": 5, "width": 8, "kind": "code" },
+            { "name": "length_label", "start": 14, "width": 6, "kind": "literal", "value": "LENGTH" },
+            { "name": "length", "start": 21, "width": 3, "kind": "count" },
+            { "name": "fields_label", "start": 25, "width": 6, "kind": "literal", "value": "FIELDS" },
+            { "name": "fields", "start": 32, "width": 2, "kind": "count" }
+          ]
+        },
+        "FLD": {
+          "columns": [
+            { "name": "record", "start": 5, "width": 8, "kind": "code" },
+            { "name": "field", "start": 14, "width": 12, "kind": "text" },
+            { "name": "offset", "start": 27, "width": 3, "kind": "count" },
+            { "name": "length", "start": 31, "width": 3, "kind": "count" },
+            { "name": "type", "start": 35, "width": 12, "kind": "code" },
+            { "name": "scale", "start": 48, "width": 1, "kind": "count" },
+            { "name": "date_window", "start": 50, "width": 10, "kind": "code" },
+            { "name": "pic", "start": 61, "width": 20, "kind": "text" }
+          ]
+        },
+        "POL": {
+          "columns": [
+            { "name": "policy", "start": 5, "width": 16, "kind": "code" },
+            { "name": "value", "start": 22, "width": 24, "kind": "code" }
+          ]
+        },
+        "DIA": {
+          "columns": [
+            { "name": "record", "start": 5, "width": 8, "kind": "code" },
+            { "name": "records_label", "start": 14, "width": 12, "kind": "literal", "value": "RECORDS-READ" },
+            { "name": "records_read", "start": 27, "width": 7, "kind": "count" },
+            { "name": "tail_label", "start": 35, "width": 18, "kind": "literal", "value": "SKIPPED-TAIL-BYTES" },
+            { "name": "skipped_tail_bytes", "start": 54, "width": 2, "kind": "count" },
+            { "name": "dup_label", "start": 57, "width": 14, "kind": "literal", "value": "DUPLICATE-KEYS" },
+            { "name": "duplicate_keys", "start": 72, "width": 5, "kind": "count" }
+          ]
+        }
+      }
+    }
+  },
+  "excludedReports": {
+    "POST": "write command; refused by the harness and never parsed. Prints HDR, one PST line, no TRL/END. Documented in legacy/PRINTSPEC.md only."
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "status": "pending generation",
+  "note": "Freeze 1A: nothing has been generated. Freeze 1B runs `npm run gen:fixtures`, which overwrites this file with status \"generated\", byte lengths and sha256 per file; then commit both views and tag.",
+  "generator": {
+    "script": "scripts/gen-fixtures.ts",
+    "version": "1.0.0",
+    "prng": "mulberry32",
+    "seed": 35001
+  },
+  "behaviour_version": 1,
+  "views": { "attacked": "legacy", "clean": "legacy-clean" },
+  "files": [
+    { "view": "attacked", "path": "legacy/ACCTMSTR.DAT", "bytes": null, "expected_bytes": 100037, "sha256": null },
+    { "view": "attacked", "path": "legacy/TRANS.DAT", "bytes": null, "expected_bytes": 640000, "sha256": null },
+    { "view": "clean", "path": "legacy-clean/ACCTMSTR.DAT", "bytes": null, "expected_bytes": 100037, "sha256": null },
+    { "view": "clean", "path": "legacy-clean/TRANS.DAT", "bytes": null, "expected_bytes": 640000, "sha256": null }
+  ],
+  "injection_ranges": [
+    { "id": "inj-memo-1", "file": "ACCTMSTR.DAT", "file_offset": 1371, "length": 25 },
+    { "id": "inj-memo-2", "file": "ACCTMSTR.DAT", "file_offset": 1471, "length": 25 },
+    { "id": "inj-name-1", "file": "ACCTMSTR.DAT", "file_offset": 1510, "length": 25 }
+  ]
+}

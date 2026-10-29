@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "status": "proposal - pending dev pilot and freeze 2",
+  "wholeExperimentBudgetUsd": 5,
+  "limits": {
+    "A": { "toolCalls": 8, "rawBytes": 1048576 },
+    "C2": { "toolCalls": 64, "rawBytes": 1048576 },
+    "C": { "toolCalls": 64, "rawBytes": 1048576 }
+  },
+  "shared": { "maxOutputTokens": 1024, "outputTokens": 12288, "inputTokens": 40000, "seconds": 900, "retries": 2 },
+  "constrained": {
+    "C2": ["aging", "account_search"],
+    "C": ["aging", "account_search"]
+  },
+  "constrainedReason": "Global aging and broad account-search questions can require a whole-file scan that cannot fit the 40000 cumulative input-token ceiling, even though the raw-byte ceiling exceeds the corpus. Category flags are conservative proposals; the dev pilot must record feasibility per question before freeze 2. These rows do not support a general bridge-superiority claim.",
+  "adjustments": [],
+  "cutLine": ["drop C", "60 to 40 only by a newly versioned split preserving all 12 safety slots"],
+  "freeze": { "status": "pending", "frozenAt": null }
+}

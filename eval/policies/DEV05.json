@@ -1,0 +1,11 @@
+{
+  "label": "SCRIPTED FIXTURE — not a model result",
+  "question_id": "DEV05",
+  "condition": "A",
+  "tool": "account_get",
+  "args": {
+    "account_id": "0000000046"
+  },
+  "kind": "value",
+  "path": "data.open_date"
+}

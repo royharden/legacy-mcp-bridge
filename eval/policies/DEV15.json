@@ -1,0 +1,14 @@
+{
+  "label": "SCRIPTED FIXTURE — not a model result",
+  "question_id": "DEV15",
+  "condition": "A",
+  "tool": "transactions_list",
+  "args": {
+    "account_id": "0000000052",
+    "from": "2024-01-01",
+    "to": "2024-12-31",
+    "limit": 100
+  },
+  "kind": "count",
+  "path": "matched_count"
+}

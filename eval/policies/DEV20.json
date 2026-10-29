@@ -1,0 +1,11 @@
+{
+  "label": "SCRIPTED FIXTURE — not a model result",
+  "question_id": "DEV20",
+  "condition": "A",
+  "tool": "aging_summary",
+  "args": {
+    "as_of": "2024-03-01"
+  },
+  "kind": "sum",
+  "path": "total_amount_minor"
+}

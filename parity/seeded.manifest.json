@@ -1,0 +1,15 @@
+{
+  "seed": 35517,
+  "prng": "mulberry32",
+  "generator": "parity/genSeededCases.ts",
+  "output": "parity/cases.seeded.jsonl",
+  "count": 60,
+  "per_tool": 12,
+  "id_pattern": "S001..S060",
+  "fixture_generator_seed": 35001,
+  "seed_differs_from_fixture_generator": true,
+  "intended_freeze": "before first seeded runtime evaluation",
+  "freeze_date": null,
+  "status": "pending generation",
+  "note": "Dirty Mode construction: the script has not been run and parity/cases.seeded.jsonl does not exist. Activation: `node --experimental-strip-types parity/genSeededCases.ts` (writes the 60 lines), commit them with this file updated to status \"generated\" + freeze_date + sha256 of the output, before freeze 2."
+}

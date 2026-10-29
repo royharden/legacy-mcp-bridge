@@ -1,0 +1,18 @@
+{
+  "status": "pending generation",
+  "oracle_version": 1,
+  "program": "LEGACY01",
+  "note": "Freeze 1A (construction): sources authored, nothing executed. Freeze 1B fills bytes and sha256 for every file below, then a static test recomputes them. After 1B a genuine oracle defect is fixed only as oracle_version 2 with a CHANGELOG entry.",
+  "files": [
+    { "path": "legacy/legacy.mjs", "bytes": null, "sha256": null },
+    { "path": "legacy/lib/args.mjs", "bytes": null, "sha256": null },
+    { "path": "legacy/lib/decode.mjs", "bytes": null, "sha256": null },
+    { "path": "legacy/lib/edit.mjs", "bytes": null, "sha256": null },
+    { "path": "legacy/lib/files.mjs", "bytes": null, "sha256": null },
+    { "path": "legacy/lib/post.mjs", "bytes": null, "sha256": null },
+    { "path": "legacy/lib/print.mjs", "bytes": null, "sha256": null },
+    { "path": "legacy/lib/reports.mjs", "bytes": null, "sha256": null },
+    { "path": "legacy/PRINTSPEC.md", "bytes": null, "sha256": null },
+    { "path": "parity/printspec.json", "bytes": null, "sha256": null }
+  ]
+}

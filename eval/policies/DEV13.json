@@ -1,0 +1,12 @@
+{
+  "label": "SCRIPTED FIXTURE — not a model result",
+  "question_id": "DEV13",
+  "condition": "A",
+  "tool": "accounts_find",
+  "args": {
+    "status": "C",
+    "limit": 50
+  },
+  "kind": "count",
+  "path": "matched_count"
+}

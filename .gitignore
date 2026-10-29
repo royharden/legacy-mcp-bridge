@@ -1,0 +1,23 @@
+node_modules
+dist
+.env
+results/.ledger.lock
+results/audit/
+results/runs/
+
+# Local credentials, private keys and generated archives
+.env.*
+!.env.example
+.creds/
+ArchiveManager-creds.txt
+*.pem
+*.key
+*.p12
+*.pfx
+*.zip
+*.7z
+*.tar.gz
+
+# Protected evaluation data and environment files are excluded from this export
+.env*
+eval/questions.heldout.jsonl

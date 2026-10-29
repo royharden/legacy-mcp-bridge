@@ -1,0 +1,9 @@
+{
+  "label": "SCRIPTED FIXTURE — not a model result",
+  "question_id": "DEV24",
+  "condition": "A",
+  "tool": "describe_layouts",
+  "args": {},
+  "kind": "count",
+  "path": "data.layouts[record=TRANS].fields"
+}

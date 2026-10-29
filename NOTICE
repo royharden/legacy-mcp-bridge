@@ -1,0 +1,21 @@
+legacy-mcp-bridge
+Copyright (c) 2026 Roy Harden. Licensed under the MIT License (see LICENSE).
+
+All data in this repository is synthetic. No real account, person or tax number is used.
+
+Idea attributions
+-----------------
+No code, data or documentation was copied from the projects below; they informed ideas and patterns only.
+If any code is ever vendored, it will be listed with its licence and commit in VENDORED.md.
+
+- bvenkata/legacy2mcp (Apache-2.0 per its API metadata and badge): curated typed read-only tools, JSONL audit
+  log, row caps. This project adds masking, structural read-only (no write tool exists) and parity tests.
+- hkak03key/cli-wrap-mcp (MIT): argv execution without a shell, validation before interpolation, byte-capped
+  output, stdout reserved for the MCP protocol.
+- IBM/ibmi-mcp-server (Apache-2.0): curated named tools instead of free queries; one engine feeding both the
+  server and the client.
+- Tannex/cq (MIT) and AbsaOSS/cobrix (Apache-2.0): copybook/decoder test ideas (offset checks from copybooks).
+- AWS CardDemo (Apache-2.0): realistic legacy field-naming ideas only; no files copied.
+- pmilet/witness (Apache-2.0): record/replay/diff framing for parity.
+- Azure Legacy-Modernization sample (MIT): structural-parity framing; this project's addition is behavioural
+  parity with declared tolerances.

@@ -1,0 +1,3 @@
+fixtures/**/*.DAT binary
+*.cpy text eol=lf
+legacy/** text eol=lf

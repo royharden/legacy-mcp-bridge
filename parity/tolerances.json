@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "tolerances": [
+    {
+      "id": "run_ts_page_header",
+      "kind": "ignore_volatile",
+      "field": "hdr.run_ts",
+      "reason": "The oracle page header prints the run timestamp (PRINTSPEC kind volatile; pinned by LEGACY_RUN_TS in the harness). The bridge has no such field, so it is excused, never compared.",
+      "cases": ["T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08", "T09", "T10", "T11", "T12", "T13", "T14", "T15", "T16", "T17", "T18", "T19", "T20", "T21", "T22", "T23", "T24", "T27", "T28", "T29", "T30", "T31", "T32", "T33", "T34"]
+    },
+    {
+      "id": "taxid_masked_by_bridge",
+      "kind": "expected_divergence",
+      "field": "tax_id",
+      "transform": "mask_taxid",
+      "reason": "The legacy program prints the 9-character tax id unmasked; the bridge must return mask(oracle value) = ***-**- + last four (LEGACY-BEHAVIOUR 5.9). An unmasked or wrongly masked bridge value fails.",
+      "cases": ["T01", "T02", "T03", "T04", "T05", "T06", "T07", "T12", "T13", "T27", "T28", "T29", "T30", "T31", "T32"]
+    }
+  ]
+}

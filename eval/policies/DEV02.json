@@ -1,0 +1,11 @@
+{
+  "label": "SCRIPTED FIXTURE — not a model result",
+  "question_id": "DEV02",
+  "condition": "A",
+  "tool": "account_get",
+  "args": {
+    "account_id": "0000000042"
+  },
+  "kind": "value",
+  "path": "data.balance_minor"
+}

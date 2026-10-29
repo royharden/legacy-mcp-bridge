@@ -1,0 +1,13 @@
+{
+  "label": "SCRIPTED FIXTURE — not a model result",
+  "question_id": "DEV11",
+  "condition": "A",
+  "tool": "accounts_find",
+  "args": {
+    "status": "A",
+    "name_prefix": "ZEPHYR",
+    "limit": 50
+  },
+  "kind": "sum",
+  "path": "balance_total_minor"
+}

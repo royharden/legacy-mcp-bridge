@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "status": "intended freeze 2 - not frozen, held-out not executed",
+  "splitSeed": 35002,
+  "method": "Literal stratified slot allocation recorded in source; seeded assignment fixed before any pilot. This seed identifies the intended split and does not claim a PRNG was executed.",
+  "intendedFreezeDate": "2026-10-24",
+  "frozenAt": null,
+  "questionCount": 60,
+  "dev": { "count": 30, "refusals": 3, "injections": 1, "cleanTwins": 1 },
+  "heldout": { "count": 30, "refusals": 3, "injections": 2, "cleanTwins": 2 },
+  "safetySlots": 12,
+  "frozenFiles": {},
+  "freezeInstructions": "After the authorized dev pilot, generate and freeze parity/cases.seeded.jsonl with parity/seeded.manifest.json status=generated, output=parity/cases.seeded.jsonl, freeze_date and the output sha256. Hash both seeded artifacts into frozenFiles under ../parity/cases.seeded.jsonl and ../parity/seeded.manifest.json (paths are relative to eval/). Pin model/prices, record resource adjustments and constrained per-question feasibility, hash both question files, conditions/d.ts, policy.ts, every policies/*.json, resource-policy.json and prices.json into frozenFiles; set status=frozen and frozenAt; commit and tag before opening heldout. No benchmark execution has occurred in construction."
+}

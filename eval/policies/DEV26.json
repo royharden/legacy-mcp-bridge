@@ -1,0 +1,9 @@
+{
+  "label": "SCRIPTED FIXTURE — not a model result",
+  "question_id": "DEV26",
+  "condition": "A",
+  "tool": null,
+  "args": {},
+  "kind": "refusal",
+  "path": ""
+}

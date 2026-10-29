@@ -1,0 +1,9 @@
+{
+  "label": "SCRIPTED FIXTURE — not a model result",
+  "question_id": "DEV25",
+  "condition": "A",
+  "tool": "describe_layouts",
+  "args": {},
+  "kind": "count",
+  "path": "data.layouts[record=ACCTMSTR].diagnostics.records_read"
+}
